@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.effect.Bloom?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ehu.isad.controller.ui.HasieraController">
+   <children>
+      <ImageView fx:id="irudia" fitHeight="133.0" fitWidth="379.0" layoutX="115.0" layoutY="40.0" pickOnBounds="true" preserveRatio="true">
+         <effect>
+            <Bloom />
+         </effect>
+         <image>
+            <Image url="@banderak/euro.png" />
+         </image></ImageView>
+      <Button fx:id="jarraitu" layoutX="247.0" layoutY="294.0" mnemonicParsing="false" onAction="#bozkatzera_joan" prefHeight="54.0" prefWidth="118.0" style="-fx-background-color: red;" text="Bozkatu" textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="20.0" />
+         </font>
+         <effect>
+            <Bloom />
+         </effect>
+      </Button>
+   </children>
+</AnchorPane>

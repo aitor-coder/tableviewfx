@@ -11,7 +11,7 @@
       <center>
           <TableView fx:id="tbData" prefHeight="349.0" prefWidth="1066.0" BorderPane.alignment="CENTER">
               <columns>
-                  <TableColumn fx:id="studentId" prefWidth="75.0" text="StudentId" />
+                  <TableColumn fx:id="studentId" prefWidth="75.0" />
                   <TableColumn fx:id="firstName" prefWidth="75.0" text="First Name" />
                   <TableColumn fx:id="lastName" prefWidth="75.0" text="Last Name" />
             <TableColumn fx:id="image" prefWidth="75.0" text="Image" />
