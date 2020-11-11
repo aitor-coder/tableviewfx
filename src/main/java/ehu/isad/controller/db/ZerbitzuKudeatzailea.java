@@ -2,6 +2,7 @@ package ehu.isad.controller.db;
 
 import ehu.isad.controller.ui.HerrialdeaController;
 import ehu.isad.model.ArtistaModel;
+import ehu.isad.model.BotoakModel;
 import ehu.isad.model.BozkaketaModel;
 import ehu.isad.model.HerrialdeModel;
 import javafx.scene.image.Image;
@@ -9,6 +10,7 @@ import javafx.scene.image.Image;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 
 public class ZerbitzuKudeatzailea {
@@ -104,9 +106,6 @@ public class ZerbitzuKudeatzailea {
             bozkaketak.add(b);
         }
 
-
-
-
         return bozkaketak;
 
     }
@@ -123,4 +122,49 @@ public class ZerbitzuKudeatzailea {
         }
         return true;
     }
-}
+
+    public void sartu_botoak(BotoakModel botoa) {
+        String sententzia = "insert into Bozkaketa VALUES ('" + botoa.getBozkatua() + "','" + botoa.getBozkatuDu() + "'," + botoa.getUrtea() + "," + botoa.getPuntuak() + ")";
+        DBKudeatzaile db = DBKudeatzaile.getInstantzia();
+        ResultSet erantzuna = db.execSQL(sententzia);
+    }
+    public List<HerrialdeModel> eman_top_3(){
+        Calendar c=Calendar.getInstance();
+        System.out.println(c.get(Calendar.YEAR));
+        String sententzia ="select bozkatuaIzanDa,bandera,sum(puntuak) as puntuak from Bozkaketa,Herrialde where izena=bozkatuaIzanDa AND urtea="+c.get(Calendar.YEAR)+" group by bozkatuaIzanDa order by puntuak DESC";
+        DBKudeatzaile db=DBKudeatzaile.getInstantzia();
+        ResultSet erantzuna=db.execSQL(sententzia);
+        List<HerrialdeModel> ranking=new ArrayList<HerrialdeModel>();
+        HerrialdeModel herrialdea;
+
+        String bozkatuaIzan="";
+        String bandera="";
+        Integer puntuak=0;
+
+        while (true){
+            try {
+                if (!erantzuna.next()) break;
+            } catch (SQLException throwables) {
+                throwables.printStackTrace();
+            }
+            try {
+                bozkatuaIzan=erantzuna.getString("bozkatuaIzanDa");
+            } catch (SQLException throwables) {
+                throwables.printStackTrace();
+            }
+            try {
+                bandera=erantzuna.getString("bandera");
+            } catch (SQLException throwables) {
+                throwables.printStackTrace();
+            }
+            try {
+                puntuak=erantzuna.getInt("puntuak");
+            } catch (SQLException throwables) {
+                throwables.printStackTrace();
+            }
+            herrialdea=new HerrialdeModel(bozkatuaIzan,bandera,puntuak);
+            ranking.add(herrialdea);
+        }
+        return ranking;
+    }
+ }

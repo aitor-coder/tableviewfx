@@ -2,6 +2,7 @@ package ehu.isad.controller.ui;
 
 import ehu.isad.Main;
 import ehu.isad.controller.db.ZerbitzuKudeatzailea;
+import ehu.isad.model.BotoakModel;
 import ehu.isad.model.BozkaketaModel;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -9,10 +10,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.geometry.Pos;
-import javafx.scene.control.Button;
-import javafx.scene.control.TableCell;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
+import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.control.cell.TextFieldTableCell;
 import javafx.scene.image.Image;
@@ -21,8 +19,7 @@ import javafx.util.Callback;
 import javafx.util.converter.IntegerStringConverter;
 
 import java.net.URL;
-import java.util.List;
-import java.util.ResourceBundle;
+import java.util.*;
 
 public class HerrialdeaController implements Initializable {
     private Main main;
@@ -52,7 +49,26 @@ public class HerrialdeaController implements Initializable {
     private ImageView irudia;
     @FXML
     void puntuak_aldatu(ActionEvent event) {
-
+        ZerbitzuKudeatzailea zk=new ZerbitzuKudeatzailea();
+        int botoGuztiak=0;
+        List<BotoakModel> bozkaketaGuztiak=new ArrayList<BotoakModel>();
+        BozkaketaModel bozkaketa;
+        for (int i = 0; i < bozkaketa_zerrenda.size(); i ++){
+            bozkaketa = bozkaketa_zerrenda.get(i);
+            if (bozkaketa.getPuntuak() > 0){
+                Calendar c=Calendar.getInstance();
+                BotoakModel botoa=new BotoakModel(bozkaketa.getHerrialdea(),herria, c.get(Calendar.YEAR),bozkaketa.getPuntuak());
+                bozkaketaGuztiak.add(botoa);
+                botoGuztiak=botoGuztiak+bozkaketa.getPuntuak();
+            }
+            if (botoGuztiak==5){
+                break;
+            }
+        }
+        for(int z=0;z<bozkaketaGuztiak.size();z++){
+            zk.sartu_botoak(bozkaketaGuztiak.get(z));
+        }
+        main.rankingErakutsi();
     }
     private ObservableList<BozkaketaModel> bozkaketa_zerrenda=FXCollections.observableArrayList();
 

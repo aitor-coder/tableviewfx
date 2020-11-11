@@ -14,6 +14,7 @@ import javafx.scene.image.ImageView;
 import javafx.util.StringConverter;
 
 import java.net.URL;
+import java.util.Calendar;
 import java.util.List;
 import java.util.ResourceBundle;
 
@@ -32,8 +33,9 @@ public class AukeratuController implements Initializable {
     @FXML
     void botoak_erakutsi(ActionEvent event) {
         ZerbitzuKudeatzailea zk=new ZerbitzuKudeatzailea();
+        Calendar c=Calendar.getInstance();
 
-        if (zk.bozkatu_du(combo_herriak.getValue().getIzena(),2019)){
+        if (zk.bozkatu_du(combo_herriak.getValue().getIzena(),c.get(Calendar.YEAR))){
            main.erroreaErakutsi(combo_herriak.getValue().getIzena());
         }else {
            main.bozkaketaErakutsi(combo_herriak.getValue().getIzena());

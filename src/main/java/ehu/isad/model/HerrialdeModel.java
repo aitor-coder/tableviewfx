@@ -3,7 +3,7 @@ package ehu.isad.model;
 public class HerrialdeModel {
     String izena;
     String bandera;
-
+    Integer botoGuztiak;
 
     public HerrialdeModel(String Izena, String Bandera){
         this.izena=Izena;
@@ -28,5 +28,13 @@ public class HerrialdeModel {
         this.bandera = bandera+".png";
     }
 
+    public Integer getBotoGuztiak() {
+        return botoGuztiak;
+    }
 
+    public HerrialdeModel(String izena, String bandera, Integer botoGuztiak) {
+        this.izena = izena;
+        this.bandera = bandera+".png";
+        this.botoGuztiak = botoGuztiak;
+    }
 }

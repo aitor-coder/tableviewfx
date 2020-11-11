@@ -33,7 +33,6 @@ public class DBKudeatzaile {
             try {
                 conn.close();
             } catch (SQLException e) {
-             
                 e.printStackTrace();
             }
 
