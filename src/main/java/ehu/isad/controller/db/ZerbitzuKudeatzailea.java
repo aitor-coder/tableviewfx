@@ -130,7 +130,6 @@ public class ZerbitzuKudeatzailea {
     }
     public List<HerrialdeModel> eman_top_3(){
         Calendar c=Calendar.getInstance();
-        System.out.println(c.get(Calendar.YEAR));
         String sententzia ="select bozkatuaIzanDa,bandera,sum(puntuak) as puntuak from Bozkaketa,Herrialde where izena=bozkatuaIzanDa AND urtea="+c.get(Calendar.YEAR)+" group by bozkatuaIzanDa order by puntuak DESC";
         DBKudeatzaile db=DBKudeatzaile.getInstantzia();
         ResultSet erantzuna=db.execSQL(sententzia);

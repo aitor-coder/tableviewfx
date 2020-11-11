@@ -37,7 +37,6 @@ public class RankingController {
     @FXML
     private ImageView irudia_3;
     public void eman_rankinga(){
-        System.out.println("forajkoerkgñermgerkglaergañr,");
         ZerbitzuKudeatzailea zk=new ZerbitzuKudeatzailea();
         List<HerrialdeModel> top3=zk.eman_top_3();
 
